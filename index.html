@@ -6,11 +6,12 @@
     <title>EduTalkz | Teaching the Teachers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <style>
         /* --- 1. VARIABLES & RESET --- */
         :root {
+            /* Palette */
             --c-terra: #aa8a79;
             --c-sand: #d4ac92;
             --c-slate: #777e82;
@@ -20,6 +21,7 @@
             --c-dark: #1a1a1a;
             --c-white: #ffffff;
 
+            /* Spacing & Type */
             --font-sans: 'Manrope', sans-serif;
             --font-serif: 'Playfair Display', serif;
             --section-padding: 8rem 2rem;
@@ -41,7 +43,6 @@
             background-color: var(--c-cream);
             color: var(--c-dark);
             line-height: 1.6;
-            /* Allow scrolling by default, JS will toggle this */
             overflow-x: hidden; 
         }
 
@@ -55,16 +56,14 @@
             display: none !important; 
         }
 
-        /* This class now applies only to the #site-wrapper, not the body */
         .blur-active { 
             filter: blur(8px); 
             pointer-events: none; 
             user-select: none; 
-            transform: scale(0.99); /* Slight pushback effect */
+            transform: scale(0.99); 
             transition: filter 0.5s ease, transform 0.5s ease;
         }
         
-        /* Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -75,19 +74,67 @@
             transform: translateY(0);
         }
 
-        /* --- 3. MODAL (JOIN CARD) --- */
+        /* --- 3. NAVIGATION (FAUX) --- */
+        .top-nav {
+            position: absolute; /* Scrolls with the page (fades away naturally) */
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: center; /* Centered visually */
+            z-index: 100;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-item {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--c-dark); /* Dark text to sit on Cream background */
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--c-terra);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--c-terra);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* --- 4. MODAL (JOIN CARD) --- */
         #join-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            z-index: 9999; /* Stays on top of everything */
+            z-index: 9999; 
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(102, 132, 153, 0.3); /* Slight tint */
-            /* We do NOT blur the backdrop here, we blur the site-wrapper instead */
+            background: rgba(102, 132, 153, 0.3); 
             opacity: 1;
             transition: opacity 0.5s ease;
         }
@@ -109,9 +156,8 @@
             display: block;
             max-width: 100%;
             height: auto;
-            /* Drop shadow to make it pop against the blurred background */
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
-            border-radius: 8px; /* Optional slight rounding */
+            border-radius: 8px; 
         }
 
         .modal-close-btn {
@@ -126,16 +172,13 @@
             font-weight: bold;
         }
 
-        /* --- 4. SITE WRAPPER --- */
-        /* This wraps all page content so we can blur it independently of the modal */
+        /* --- 5. SECTIONS --- */
         #site-wrapper {
             transition: filter 0.5s ease, transform 0.5s ease;
             width: 100%;
             background-color: var(--c-cream);
         }
 
-        /* --- 5. SECTIONS --- */
-        
         /* LAYER 1: LOGO */
         .layer-logo {
             width: 100%;
@@ -144,6 +187,7 @@
             justify-content: center;
             align-items: center;
             background-color: var(--c-cream);
+            position: relative; /* Context for Nav */
         }
 
         .layer-logo img {
@@ -322,7 +366,9 @@
             color: var(--c-blue);
         }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
+            .top-nav { display: none; /* Hide full nav on mobile for this mockup */ }
             .value-item { grid-template-columns: 1fr; text-align: center; }
             .about-block { grid-template-columns: 1fr; gap: 1rem; }
             .layer-statements { grid-template-columns: 1fr; }
@@ -342,6 +388,18 @@
     <main id="site-wrapper" class="blur-active">
 
         <section class="layer-logo reveal">
+            
+            <nav class="top-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">Home</li>
+                    <li class="nav-item">Talkz</li>
+                    <li class="nav-item">Courses</li>
+                    <li class="nav-item">Events</li>
+                    <li class="nav-item">Community</li>
+                    <li class="nav-item">Speakers</li>
+                </ul>
+            </nav>
+
             <img src="assets/images/EduTalkzLogo.png" alt="EduTalkz Logo">
         </section>
 
@@ -371,7 +429,6 @@
 
         <section class="layer-values">
             <div class="values-container">
-                
                 <div class="value-item">
                     <div class="value-number">1</div>
                     <div class="value-content">
@@ -380,7 +437,6 @@
                         <span class="value-sub">CPD that keeps pace with the modern classroom.</span>
                     </div>
                 </div>
-
                 <div class="value-item">
                     <div class="value-number">2</div>
                     <div class="value-content">
@@ -389,7 +445,6 @@
                         <span class="value-sub">Join live or watch later - your time, your pace.</span>
                     </div>
                 </div>
-
                 <div class="value-item">
                     <div class="value-number">3</div>
                     <div class="value-content">
@@ -398,7 +453,6 @@
                         <span class="value-sub">Sessions that nurture mental health, resilience, and work-life balance.</span>
                     </div>
                 </div>
-
                 <div class="value-item">
                     <div class="value-number">4</div>
                     <div class="value-content">
@@ -407,7 +461,6 @@
                         <span class="value-sub">Professional recognition while you learn.</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -415,45 +468,45 @@
             
             <div class="about-block reveal">
                 <div class="about-left">
-                    <h2>Teaching the Teachers</h2>
+                    <h2>The Rationale</h2>
                 </div>
                 <div class="about-right">
-                    <p>Educators shape the minds that will define our future, yet they are often the most underserved when it comes to continuous professional learning. Teachers face immense pressure: adapting to evolving curricula, integrating new technologies, and maintaining their own mental wellbeing.</p>
-                    <p><strong>EduTalkz recognises that empowered teachers create inspired learners.</strong> By offering continuous professional development (CPD) through accessible, evidence-based webinars, we equip teachers with the resilience and practical tools to thrive.</p>
+                    <p>Global research consistently shows that teacher quality is the single most important in-school factor influencing learner outcomes. A meta-analysis by the OECD notes that <strong>improving teacher professional learning has a greater impact on learner achievement than reducing class size</strong>.</p>
+                    <p>Yet, in South Africa, teachers face immense pressure: adapting to evolving curricula, diverse learning needs, and overcrowded classrooms. EduTalkz exists to close this gap by providing a national, scalable solution that equips teachers with resilience and practical tools.</p>
                 </div>
             </div>
 
             <div class="about-block reveal">
                 <div class="about-left">
-                    <h2>Unity in Diversity</h2>
+                    <h2>Built on a Proven Model</h2>
                 </div>
                 <div class="about-right">
-                    <p>Language should never be a barrier to learning. The EduTalkz translation functionality enables every talk—live or recorded—to be accessed in any language via subtitles.</p>
+                    <p>EduTalkz is not an experiment; it is built on the robust infrastructure of <strong>Medtalkz</strong>, a well-established platform for medical professionals that has grown to more than 37,000 registered users.</p>
+                    <p>By replicating this model—which already houses a library of over 1,700 accredited lectures—we are bringing weekly high-quality CPD webinars and expert-led talks to the education sector. We know this model works at scale.</p>
+                </div>
+            </div>
+
+            <div class="about-block reveal">
+                <div class="about-left">
+                    <h2>Beyond Translation</h2>
+                </div>
+                <div class="about-right">
+                    <p>Research from UNESCO and the World Bank affirms that learning in one’s home language deepens comprehension and improves teaching performance. This is why our multilingual capability is about more than just subtitles—it is about cognitive impact.</p>
+                    <p>By offering content in languages including <strong>isiZulu, isiXhosa, Sepedi, and Afrikaans</strong>, we ensure that complex pedagogical concepts are fully understood and retained, boosting teacher confidence across linguistic divides.</p>
+                </div>
+            </div>
+
+            <div class="about-block reveal">
+                <div class="about-left">
+                    <h2>Vital & Scalable</h2>
+                </div>
+                <div class="about-right">
+                    <p>Teachers are often unable to attend in-person workshops due to cost and geographic constraints. Online learning removes these barriers.</p>
                     <ul>
-                        <li>Equitable access for educators in urban and rural areas.</li>
-                        <li>Professional growth across linguistic divides.</li>
-                        <li>National scalability serving every teacher in South Africa.</li>
+                        <li><strong>Anytime Access:</strong> Live or on-demand viewing creates a library for lifelong learning.</li>
+                        <li><strong>Mobile First:</strong> Optimised for phones, ensuring access in rural and low-resource settings.</li>
+                        <li><strong>Cost-Effective:</strong> EduTalkz remains free to teachers, ensuring no educator is excluded due to financial constraints.</li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="about-block reveal">
-                <div class="about-left">
-                    <h2>Built on Success</h2>
-                </div>
-                <div class="about-right">
-                    <p>EduTalkz is built on the robust infrastructure of Medtalkz, a platform serving over 37,000 health professionals with 1,700+ accredited lectures. We are replicating this proven model for education—bringing weekly high-quality CPD webinars and an ever-growing library of content to teachers across the continent.</p>
-                </div>
-            </div>
-
-            <div class="about-block reveal">
-                <div class="about-left">
-                    <h2>Why Online CPD?</h2>
-                </div>
-                <div class="about-right">
-                    <p><strong>Convenience:</strong> No travel costs. No disruption to teaching time. Learn on your phone in low-resource settings.</p>
-                    <p><strong>Quality:</strong> Expert-led sessions on STEM, literacy, inclusion, and classroom management.</p>
-                    <p><strong>Cost-Effective:</strong> EduTalkz is designed to remain free to teachers, upholding our ethos of open access to education.</p>
                 </div>
             </div>
 
@@ -467,22 +520,13 @@
             const wrapper = document.getElementById('site-wrapper');
             const body = document.body;
             
-            // Fade out modal
             modal.style.opacity = '0';
-            
-            // Allow time for fade transition before hiding display
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 500); 
-            
-            // Remove blur from the wrapper
+            setTimeout(() => { modal.classList.add('hidden'); }, 500); 
             wrapper.classList.remove('blur-active');
-            
-            // Re-enable body scrolling
             body.classList.remove('modal-open');
         }
 
-        // 2. Scroll Reveal (Fade Up) Observer
+        // 2. Scroll Reveal Observer
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -505,7 +549,6 @@
         }, { rootMargin: '-20% 0px -20% 0px', threshold: 0.5 }); 
 
         document.querySelectorAll('.value-item').forEach(el => glowObserver.observe(el));
-
     </script>
 </body>
 </html>
