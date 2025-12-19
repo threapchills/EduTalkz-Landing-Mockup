@@ -254,71 +254,79 @@
             font-weight: 300;
         }
 
-        /* LAYER 4: VALUES (UPDATED FOR SIZE & BREATHING ROOM) */
+        /* LAYER 4: CORE VALUES (CINEMATIC) */
         .layer-values {
             background-color: var(--c-dark);
             color: var(--c-white);
-            /* Increased padding for entrance/exit */
-            padding: 10rem 2rem;
+            padding: 0 2rem; /* Reduced vertical padding since items are huge */
         }
 
         .values-container { max-width: 1200px; margin: 0 auto; }
 
         .value-item {
             display: grid;
-            grid-template-columns: 200px 1fr; /* Wider space for bigger numbers */
+            grid-template-columns: 200px 1fr; 
             align-items: center;
-            /* KEY CHANGE: Ensure each item takes up significant vertical space */
-            min-height: 70vh; 
+            /* Full screen height for each item to let it breathe */
+            min-height: 90vh; 
             padding: 2rem 0;
-            opacity: 0.3;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            opacity: 0.2;
+            transition: opacity 1s ease, transform 1s ease;
             transform: scale(0.9);
+            /* Center vertically */
+            display: flex;
+            flex-direction: row;
+            gap: 4rem;
         }
 
         .value-item.glow-active { opacity: 1; transform: scale(1); }
 
         .value-number {
-            /* Much larger font size */
             font-size: 12rem;
             font-weight: 800;
             line-height: 1;
             color: transparent;
             -webkit-text-stroke: 3px var(--c-slate);
             transition: all 0.8s ease;
+            flex-shrink: 0;
         }
 
         .value-item.glow-active .value-number {
             color: var(--c-terra);
             -webkit-text-stroke: 0;
-            /* Intensified glow */
-            text-shadow: 0 0 50px rgba(170, 138, 121, 0.8);
+            text-shadow: 0 0 60px rgba(170, 138, 121, 0.7);
+        }
+
+        .value-content {
+            flex-grow: 1;
         }
 
         .value-content h3 {
-            /* Larger font size */
-            font-size: 4rem;
+            font-size: 4.5rem; /* Massive headings */
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--c-white);
             font-weight: 800;
+            line-height: 1;
         }
 
         .value-content p {
-            /* Larger font size */
-            font-size: 1.75rem;
+            font-size: 2rem;
             color: var(--c-sand);
-            font-weight: 400;
-            line-height: 1.3;
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 800px;
         }
 
         .value-sub {
             display: block;
-            margin-top: 1rem;
-            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
             color: var(--c-slate);
-            font-weight: 300;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* LAYER 5: ABOUT */
@@ -369,19 +377,92 @@
             color: var(--c-blue);
         }
 
+        /* --- 6. FOOTER --- */
+        .layer-footer {
+            background-color: var(--c-dark);
+            color: var(--c-slate);
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--c-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-socials svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--c-slate);
+            transition: fill 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-socials svg:hover {
+            fill: var(--c-terra);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-link-item {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link-item:hover { color: var(--c-sand); }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .top-nav { display: none; } /* Hide faux nav on smaller screens */
+            .top-nav { display: none; }
             .value-item { 
-                grid-template-columns: 1fr; 
+                flex-direction: column;
                 text-align: center; 
-                min-height: auto; /* Let it flow naturally on tablet/mobile */
+                min-height: auto; 
                 padding: 6rem 1rem; 
+                gap: 2rem;
             }
             .value-number { font-size: 8rem; }
             .value-content h3 { font-size: 3rem; }
-             .about-block { grid-template-columns: 1fr; gap: 2rem; }
+            .value-content p { font-size: 1.25rem; }
+            .about-block { grid-template-columns: 1fr; gap: 2rem; }
             .layer-statements { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+            .footer-links { justify-content: center; }
+            .footer-socials { justify-content: center; }
         }
     </style>
 </head>
@@ -472,7 +553,6 @@
         </section>
 
         <section class="layer-about">
-            
             <div class="about-block reveal">
                 <div class="about-left">
                     <h2>The Rationale</h2>
@@ -516,8 +596,33 @@
                     </ul>
                 </div>
             </div>
-
         </section>
+
+        <footer class="layer-footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <div class="footer-logo">EduTalkz</div>
+                    
+                    <div class="footer-socials">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        <svg viewBox="0 0 24 24"><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path></svg>
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </div>
+                    
+                    <div class="footer-copy">© 2025 EduTalkz. All Rights Reserved.</div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <span class="footer-link-item">Contact Us</span>
+                        <span class="footer-link-item">Privacy Policy</span>
+                        <span class="footer-link-item">Terms of Use</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
     </main>
 
     <script>
@@ -544,7 +649,8 @@
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // 3. Glowing Numbers Observer (Tweaked for larger items)
+        // 3. Glowing Numbers Observer
+        // Threshold adjusted because items are now much taller
         const glowObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -553,7 +659,7 @@
                     entry.target.classList.remove('glow-active');
                 }
             });
-        }, { rootMargin: '-25% 0px -25% 0px', threshold: 0.3 }); 
+        }, { rootMargin: '-30% 0px -30% 0px', threshold: 0.2 }); 
 
         document.querySelectorAll('.value-item').forEach(el => glowObserver.observe(el));
     </script>
