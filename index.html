@@ -267,7 +267,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            min-height: 90vh; /* Desktop: Huge breathing room */
+            min-height: 90vh; /* Desktop height */
             padding: 2rem 0;
             gap: 4rem;
             opacity: 0.2;
@@ -475,66 +475,93 @@
             fill: var(--c-terra);
         }
 
-        /* --- RESPONSIVE MOBILE TWEAKS --- */
+        /* --- MOBILE OVERRIDES (Restoring balance) --- */
         @media (max-width: 1024px) {
             
-            /* 1. RESTORE NAV (Scrollable) */
-            .top-nav { 
-                display: flex; 
-                justify-content: flex-start;
-                overflow-x: auto; /* Allow horizontal scroll */
-                white-space: nowrap;
-                padding: 1rem;
-                width: 100%;
+            /* 1. NAV HEADER: Justified Center, Larger Text */
+            .top-nav {
+                justify-content: center;
+                padding: 1.5rem 1rem;
+                overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
             }
-            
-            /* Hide scrollbar for cleaner look */
-            .top-nav::-webkit-scrollbar { display: none; }
-            .top-nav { -ms-overflow-style: none; scrollbar-width: none; }
-
             .nav-list {
                 gap: 2rem;
-                padding-right: 2rem; /* Buffer for scrolling */
+                /* Center items in the flex container */
+                justify-content: center; 
+                width: 100%;
             }
-
             .nav-item {
-                font-size: 0.75rem; /* Smaller text */
+                font-size: 1rem; /* Bigger text */
+                white-space: nowrap;
             }
 
-            /* 2. RESTORE CINEMATIC HEIGHT FOR VALUES */
-            /* Instead of min-height: auto, we enforce a height so user scrolls ONE value at a time */
+            /* 2. LOGO LAYER: Remove Dead Space */
+            .layer-logo {
+                height: auto; /* Kill the 100vh */
+                min-height: 50vh; /* Reasonable minimum */
+                padding: 6rem 0; /* Balanced padding */
+            }
+
+            /* 3. HERO BANNER: Force Visibility (Short Wide) */
+            .layer-hero {
+                height: 40vh; /* Fixed short height on mobile */
+                width: 100%;
+            }
+
+            /* 4. STATEMENTS: Bigger Text, More Breathing Room */
+            .statement-card {
+                padding: 4rem 2rem; 
+            }
+            .statement-card h3 {
+                font-size: 2.5rem; /* Significant bump */
+            }
+            .statement-card p {
+                font-size: 1.25rem; /* Legible body text */
+            }
+
+            /* 5. CORE VALUES: Fix Dead Space Beneath */
             .value-item { 
                 flex-direction: column;
                 text-align: center; 
-                min-height: 80vh; /* This restores the 'desktop feel' on mobile */
-                padding: 0; 
-                gap: 2rem;
-                justify-content: center;
-                border-bottom: 1px solid rgba(255,255,255,0.05); /* Subtle separator */
+                /* Removed min-height 80vh which caused the gap */
+                min-height: auto; 
+                padding: 6rem 1rem; /* Use padding for breathing room instead */
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
             }
 
             .value-number { 
                 font-size: 8rem; 
                 width: auto; 
                 text-align: center;
-                margin-bottom: -1rem; /* Tighten up */
+                margin-bottom: 0; 
             }
             
             .value-content h3 { 
-                font-size: 3rem; 
+                font-size: 3.5rem; 
                 margin-bottom: 1rem;
             }
             
             .value-content p { 
-                font-size: 1.2rem; 
-                padding: 0 1rem;
+                font-size: 1.4rem; /* Larger for readability */
+                padding: 0 0.5rem;
             }
 
-            /* 3. GENERAL LAYOUT ADJUSTMENTS */
+            /* 6. ABOUT SECTION: Significantly Larger */
             .about-block { grid-template-columns: 1fr; gap: 2rem; }
-            .layer-statements { grid-template-columns: 1fr; }
             
+            .about-left h2 {
+                font-size: 3rem; /* Heroic size */
+            }
+            .about-right p {
+                font-size: 1.35rem; /* Much larger body text */
+            }
+            .about-right li {
+                font-size: 1.25rem;
+            }
+
+            /* Footer Mobile Adjustments (Kept as is, just layout) */
             .footer-card { padding: 2rem; }
             .footer-bottom { flex-direction: column; }
             .footer-right { flex-direction: column; gap: 2rem; }
@@ -643,7 +670,7 @@
                     <h2>Built on a Proven Model</h2>
                 </div>
                 <div class="about-right">
-                    <p>EduTalkz is built on the robust infrastructure of <strong>Medtalkz</strong>, a well-established platform for medical professionals that has grown to more than 37,000 registered users.</p>
+                    <p>EduTalkz is not an experiment; it is built on the robust infrastructure of <strong>Medtalkz</strong>, a well-established platform for medical professionals that has grown to more than 37,000 registered users.</p>
                     <p>By replicating this model—which already houses a library of over 1,700 accredited lectures—we are bringing weekly high-quality CPD webinars and expert-led talks to the education sector. We know this model works at scale.</p>
                 </div>
             </div>
