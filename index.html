@@ -267,7 +267,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            min-height: 90vh; /* Let them breathe */
+            min-height: 90vh; /* Desktop: Huge breathing room */
             padding: 2rem 0;
             gap: 4rem;
             opacity: 0.2;
@@ -285,7 +285,7 @@
             -webkit-text-stroke: 3px var(--c-slate);
             transition: all 0.8s ease;
             flex-shrink: 0;
-            width: 250px; /* Fixed width to align text */
+            width: 250px;
             text-align: right;
         }
 
@@ -375,8 +375,8 @@
 
         /* --- 6. FOOTER (Alkemi Card Style) --- */
         .footer-wrapper {
-            background-color: var(--c-cream); /* Matches body */
-            padding: 2rem 2rem 4rem 2rem; /* Bottom spacing */
+            background-color: var(--c-cream);
+            padding: 2rem 2rem 4rem 2rem;
             display: flex;
             justify-content: center;
         }
@@ -402,7 +402,6 @@
         .footer-logo-img {
             max-width: 300px;
             height: auto;
-            /* Invert filter ensures logo is white on dark background */
             filter: brightness(0) invert(1); 
             opacity: 0.9;
         }
@@ -476,19 +475,63 @@
             fill: var(--c-terra);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE MOBILE TWEAKS --- */
         @media (max-width: 1024px) {
-            .top-nav { display: none; }
+            
+            /* 1. RESTORE NAV (Scrollable) */
+            .top-nav { 
+                display: flex; 
+                justify-content: flex-start;
+                overflow-x: auto; /* Allow horizontal scroll */
+                white-space: nowrap;
+                padding: 1rem;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Hide scrollbar for cleaner look */
+            .top-nav::-webkit-scrollbar { display: none; }
+            .top-nav { -ms-overflow-style: none; scrollbar-width: none; }
+
+            .nav-list {
+                gap: 2rem;
+                padding-right: 2rem; /* Buffer for scrolling */
+            }
+
+            .nav-item {
+                font-size: 0.75rem; /* Smaller text */
+            }
+
+            /* 2. RESTORE CINEMATIC HEIGHT FOR VALUES */
+            /* Instead of min-height: auto, we enforce a height so user scrolls ONE value at a time */
             .value-item { 
                 flex-direction: column;
                 text-align: center; 
-                min-height: auto; 
-                padding: 6rem 1rem; 
+                min-height: 80vh; /* This restores the 'desktop feel' on mobile */
+                padding: 0; 
                 gap: 2rem;
+                justify-content: center;
+                border-bottom: 1px solid rgba(255,255,255,0.05); /* Subtle separator */
             }
-            .value-number { font-size: 8rem; width: auto; text-align: center;}
-            .value-content h3 { font-size: 3rem; }
-            .value-content p { font-size: 1.25rem; }
+
+            .value-number { 
+                font-size: 8rem; 
+                width: auto; 
+                text-align: center;
+                margin-bottom: -1rem; /* Tighten up */
+            }
+            
+            .value-content h3 { 
+                font-size: 3rem; 
+                margin-bottom: 1rem;
+            }
+            
+            .value-content p { 
+                font-size: 1.2rem; 
+                padding: 0 1rem;
+            }
+
+            /* 3. GENERAL LAYOUT ADJUSTMENTS */
             .about-block { grid-template-columns: 1fr; gap: 2rem; }
             .layer-statements { grid-template-columns: 1fr; }
             
@@ -600,7 +643,7 @@
                     <h2>Built on a Proven Model</h2>
                 </div>
                 <div class="about-right">
-                    <p>EduTalkz is not an experiment; it is built on the robust infrastructure of <strong>Medtalkz</strong>, a well-established platform for medical professionals that has grown to more than 37,000 registered users.</p>
+                    <p>EduTalkz is built on the robust infrastructure of <strong>Medtalkz</strong>, a well-established platform for medical professionals that has grown to more than 37,000 registered users.</p>
                     <p>By replicating this model—which already houses a library of over 1,700 accredited lectures—we are bringing weekly high-quality CPD webinars and expert-led talks to the education sector. We know this model works at scale.</p>
                 </div>
             </div>
