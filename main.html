@@ -1,1 +1,498 @@
-site content goes here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTalkz | Teaching the Teachers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            /* Palette */
+            --c-terra: #aa8a79;
+            --c-sand: #d4ac92;
+            --c-slate: #777e82;
+            --c-cream: #ded7c2;
+            --c-taupe: #b3a090;
+            --c-blue: #668499;
+            --c-dark: #1a1a1a;
+            --c-white: #ffffff;
+
+            /* Spacing & Type */
+            --font-sans: 'Manrope', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --section-padding: 8rem 2rem;
+            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--c-cream);
+            color: var(--c-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- 2. UTILITIES --- */
+        .hidden { display: none !important; }
+        .blur-active { filter: blur(8px); pointer-events: none; user-select: none; }
+        
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 3. MODAL (JOIN CARD) --- */
+        #join-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(102, 132, 153, 0.4); /* Blue tint overlay */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .modal-card {
+            /* Updated for Image Only */
+            background: transparent;
+            width: auto;
+            max-width: 90%;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+            cursor: pointer; /* Indicates clickable */
+            transition: transform 0.3s ease;
+        }
+
+        .modal-card:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-card img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); /* Shadow on the image itself */
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 2rem;
+            color: var(--c-white);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* --- 4. LAYER 1: LOGO --- */
+        .layer-logo {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--c-cream);
+            position: relative;
+            z-index: 10;
+        }
+
+        .layer-logo img {
+            max-width: 80%;
+            max-height: 300px;
+            width: auto;
+        }
+
+        /* --- 5. LAYER 2: HERO BANNER (Ken Burns) --- */
+        .layer-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--c-slate);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ken Burns Effect */
+            animation: kenBurns 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-20px, -10px); }
+        }
+
+        /* Gradient overlay for text readability */
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+
+        /* --- 6. LAYER 3: HERO STATEMENTS (Blocky Cards) --- */
+        .layer-statements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            width: 100%;
+        }
+
+        .statement-card {
+            padding: 4rem 2rem;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--c-white);
+            transition: transform 0.4s ease;
+        }
+
+        .statement-card:hover {
+            transform: translateY(-10px);
+            z-index: 2;
+        }
+
+        .st-1 { background-color: var(--c-terra); }
+        .st-2 { background-color: var(--c-slate); }
+        .st-3 { background-color: var(--c-blue); }
+        .st-4 { background-color: var(--c-taupe); color: var(--c-dark); }
+
+        .statement-card h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .statement-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* --- 7. LAYER 4: CORE VALUES (Glowing Numbers) --- */
+        .layer-values {
+            background-color: var(--c-dark);
+            color: var(--c-white);
+            padding: var(--section-padding);
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .value-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+            margin-bottom: 6rem;
+            opacity: 0.4; /* Dimmed by default */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: scale(0.95);
+        }
+
+        /* When the item is in the center of the viewport (via JS) */
+        .value-item.glow-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .value-number {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--c-slate);
+            transition: all 0.5s ease;
+        }
+
+        .value-item.glow-active .value-number {
+            color: var(--c-terra);
+            -webkit-text-stroke: 0;
+            text-shadow: 0 0 30px rgba(170, 138, 121, 0.6); /* Glow Effect */
+        }
+
+        .value-content h3 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--c-white);
+        }
+
+        .value-content p {
+            font-size: 1.25rem;
+            color: var(--c-sand);
+            font-weight: 300;
+        }
+
+        .value-sub {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            color: var(--c-slate);
+        }
+
+        /* --- 8. LAYER 5: ABOUT (Editorial Layout) --- */
+        .layer-about {
+            background-color: var(--c-cream);
+            padding: var(--section-padding);
+            color: var(--c-dark);
+        }
+
+        .about-block {
+            max-width: 1200px;
+            margin: 0 auto 6rem auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+            border-top: 1px solid var(--c-taupe);
+            padding-top: 3rem;
+        }
+
+        .about-left h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--c-terra);
+        }
+
+        .about-right p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--c-slate);
+        }
+        
+        .about-right strong {
+            color: var(--c-dark);
+        }
+
+        .about-right ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--c-terra);
+            padding-left: 1.5rem;
+        }
+
+        .about-right li {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--c-blue);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .value-item { grid-template-columns: 1fr; text-align: center; }
+            .about-block { grid-template-columns: 1fr; gap: 1rem; }
+            .layer-statements { grid-template-columns: 1fr; }
+            .modal-card { max-width: 95%; }
+            .modal-close-btn { top: -35px; right: 0; }
+        }
+
+    </style>
+</head>
+<body id="main-content" class="blur-active">
+
+    <div id="join-modal">
+        <div class="modal-card" onclick="dismissModal()">
+            <button class="modal-close-btn">✕</button>
+            <img src="assets/images/Join-now-box.png" alt="Join EduTalkz Now">
+        </div>
+    </div>
+
+    <section class="layer-logo reveal">
+        <img src="assets/images/EduTalkzLogo.png" alt="EduTalkz Logo">
+    </section>
+
+    <section class="layer-hero reveal">
+        <img src="assets/images/HeroBanner.png" alt="Where best practice becomes common knowledge" class="hero-img">
+        <div class="hero-overlay"></div>
+    </section>
+
+    <section class="layer-statements">
+        <div class="statement-card st-1 reveal">
+            <h3>Teaching the Teachers</h3>
+            <p>Educators shape the future. It’s time we supported those who support our learners.</p>
+        </div>
+        <div class="statement-card st-2 reveal">
+            <h3>Unity in Diversity</h3>
+            <p>Broadening access through mother tongue subtitles. We speak your language.</p>
+        </div>
+        <div class="statement-card st-3 reveal">
+            <h3>Multilingual CPD</h3>
+            <p>The first multilingual Continuous Professional Development platform for Educators in Africa.</p>
+        </div>
+        <div class="statement-card st-4 reveal">
+            <h3>Best Practice in Your Pocket</h3>
+            <p>Access an on-demand library of educational talks across diverse disciplines—staying ahead with the latest pedagogical advancements.</p>
+        </div>
+    </section>
+
+    <section class="layer-values">
+        <div class="values-container">
+            
+            <div class="value-item">
+                <div class="value-number">1</div>
+                <div class="value-content">
+                    <h3>Empowerment</h3>
+                    <p>Grow your teaching, grow your engagement.</p>
+                    <span class="value-sub">CPD that keeps pace with the modern classroom.</span>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-number">2</div>
+                <div class="value-content">
+                    <h3>Accessibility</h3>
+                    <p>Learn anytime, anywhere, in any language.</p>
+                    <span class="value-sub">Join live or watch later - your time, your pace.</span>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-number">3</div>
+                <div class="value-content">
+                    <h3>Wellbeing</h3>
+                    <p>Great teaching starts with educator wellbeing.</p>
+                    <span class="value-sub">Sessions that nurture mental health, resilience, and work-life balance.</span>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-number">4</div>
+                <div class="value-content">
+                    <h3>Credibility</h3>
+                    <p>Earn SACE-accredited CPD points.</p>
+                    <span class="value-sub">Professional recognition while you learn.</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="layer-about">
+        
+        <div class="about-block reveal">
+            <div class="about-left">
+                <h2>Teaching the Teachers</h2>
+            </div>
+            <div class="about-right">
+                <p>Educators shape the minds that will define our future, yet they are often the most underserved when it comes to continuous professional learning. Teachers face immense pressure: adapting to evolving curricula, integrating new technologies, and maintaining their own mental wellbeing.</p>
+                <p><strong>EduTalkz recognises that empowered teachers create inspired learners.</strong> By offering continuous professional development (CPD) through accessible, evidence-based webinars, we equip teachers with the resilience and practical tools to thrive.</p>
+            </div>
+        </div>
+
+        <div class="about-block reveal">
+            <div class="about-left">
+                <h2>Unity in Diversity</h2>
+            </div>
+            <div class="about-right">
+                <p>Language should never be a barrier to learning. The EduTalkz translation functionality enables every talk—live or recorded—to be accessed in any language via subtitles.</p>
+                <ul>
+                    <li>Equitable access for educators in urban and rural areas.</li>
+                    <li>Professional growth across linguistic divides.</li>
+                    <li>National scalability serving every teacher in South Africa.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about-block reveal">
+            <div class="about-left">
+                <h2>Built on Success</h2>
+            </div>
+            <div class="about-right">
+                <p>EduTalkz is built on the robust infrastructure of Medtalkz, a platform serving over 37,000 health professionals with 1,700+ accredited lectures. We are replicating this proven model for education—bringing weekly high-quality CPD webinars and an ever-growing library of content to teachers across the continent.</p>
+            </div>
+        </div>
+
+        <div class="about-block reveal">
+            <div class="about-left">
+                <h2>Why Online CPD?</h2>
+            </div>
+            <div class="about-right">
+                <p><strong>Convenience:</strong> No travel costs. No disruption to teaching time. Learn on your phone in low-resource settings.</p>
+                <p><strong>Quality:</strong> Expert-led sessions on STEM, literacy, inclusion, and classroom management.</p>
+                <p><strong>Cost-Effective:</strong> EduTalkz is designed to remain free to teachers, upholding our ethos of open access to education.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // 1. Modal Dismissal Logic
+        function dismissModal() {
+            const modal = document.getElementById('join-modal');
+            const content = document.getElementById('main-content');
+            
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 500); // Wait for fade out
+            
+            content.classList.remove('blur-active');
+        }
+
+        // 2. Scroll Reveal (Fade Up) Observer
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // 3. Glowing Numbers Observer (Layer 4)
+        // This triggers the glow specifically when the element is centered
+        const glowObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('glow-active');
+                } else {
+                    // Optional: remove class to turn off glow when scrolling away
+                    entry.target.classList.remove('glow-active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -20% 0px', threshold: 0.5 }); // Triggers when element is in middle 60% of screen
+
+        document.querySelectorAll('.value-item').forEach(el => glowObserver.observe(el));
+
+    </script>
+</body>
+</html>
