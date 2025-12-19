@@ -1,0 +1,1 @@
+A list of images that should be in the site asset folder (optional)
