@@ -52,9 +52,7 @@
         }
 
         /* --- 2. UTILITIES --- */
-        .hidden { 
-            display: none !important; 
-        }
+        .hidden { display: none !important; }
 
         .blur-active { 
             filter: blur(8px); 
@@ -76,13 +74,13 @@
 
         /* --- 3. NAVIGATION (FAUX) --- */
         .top-nav {
-            position: absolute; /* Scrolls with the page (fades away naturally) */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             padding: 2rem 3rem;
             display: flex;
-            justify-content: center; /* Centered visually */
+            justify-content: center;
             z-index: 100;
         }
 
@@ -98,15 +96,13 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--c-dark); /* Dark text to sit on Cream background */
+            color: var(--c-dark);
             cursor: pointer;
             position: relative;
             transition: color 0.3s ease;
         }
 
-        .nav-item:hover {
-            color: var(--c-terra);
-        }
+        .nav-item:hover { color: var(--c-terra); }
 
         .nav-item::after {
             content: '';
@@ -119,9 +115,7 @@
             transition: width 0.3s ease;
         }
 
-        .nav-item:hover::after {
-            width: 100%;
-        }
+        .nav-item:hover::after { width: 100%; }
 
         /* --- 4. MODAL (JOIN CARD) --- */
         #join-modal {
@@ -148,9 +142,7 @@
             transition: transform 0.3s ease;
         }
 
-        .modal-card:hover {
-            transform: scale(1.02);
-        }
+        .modal-card:hover { transform: scale(1.02); }
 
         .modal-card img {
             display: block;
@@ -187,7 +179,7 @@
             justify-content: center;
             align-items: center;
             background-color: var(--c-cream);
-            position: relative; /* Context for Nav */
+            position: relative;
         }
 
         .layer-logo img {
@@ -262,61 +254,71 @@
             font-weight: 300;
         }
 
-        /* LAYER 4: VALUES (Glowing) */
+        /* LAYER 4: VALUES (UPDATED FOR SIZE & BREATHING ROOM) */
         .layer-values {
             background-color: var(--c-dark);
             color: var(--c-white);
-            padding: var(--section-padding);
+            /* Increased padding for entrance/exit */
+            padding: 10rem 2rem;
         }
 
         .values-container { max-width: 1200px; margin: 0 auto; }
 
         .value-item {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 200px 1fr; /* Wider space for bigger numbers */
             align-items: center;
-            margin-bottom: 6rem;
-            opacity: 0.4;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: scale(0.95);
+            /* KEY CHANGE: Ensure each item takes up significant vertical space */
+            min-height: 70vh; 
+            padding: 2rem 0;
+            opacity: 0.3;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: scale(0.9);
         }
 
         .value-item.glow-active { opacity: 1; transform: scale(1); }
 
         .value-number {
-            font-size: 8rem;
+            /* Much larger font size */
+            font-size: 12rem;
             font-weight: 800;
             line-height: 1;
             color: transparent;
-            -webkit-text-stroke: 2px var(--c-slate);
-            transition: all 0.5s ease;
+            -webkit-text-stroke: 3px var(--c-slate);
+            transition: all 0.8s ease;
         }
 
         .value-item.glow-active .value-number {
             color: var(--c-terra);
             -webkit-text-stroke: 0;
-            text-shadow: 0 0 30px rgba(170, 138, 121, 0.6);
+            /* Intensified glow */
+            text-shadow: 0 0 50px rgba(170, 138, 121, 0.8);
         }
 
         .value-content h3 {
-            font-size: 2.5rem;
+            /* Larger font size */
+            font-size: 4rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             color: var(--c-white);
+            font-weight: 800;
         }
 
         .value-content p {
-            font-size: 1.25rem;
+            /* Larger font size */
+            font-size: 1.75rem;
             color: var(--c-sand);
-            font-weight: 300;
+            font-weight: 400;
+            line-height: 1.3;
         }
 
         .value-sub {
             display: block;
-            margin-top: 0.5rem;
-            font-size: 1rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
             color: var(--c-slate);
+            font-weight: 300;
         }
 
         /* LAYER 5: ABOUT */
@@ -339,41 +341,48 @@
 
         .about-left h2 {
             font-family: var(--font-serif);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             line-height: 1.2;
             color: var(--c-terra);
         }
 
         .about-right p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             margin-bottom: 1.5rem;
             color: var(--c-slate);
         }
         
-        .about-right strong { color: var(--c-dark); }
+        .about-right strong { color: var(--c-dark); font-weight: 700; }
 
         .about-right ul {
             list-style: none;
             margin-bottom: 1.5rem;
-            border-left: 3px solid var(--c-terra);
-            padding-left: 1.5rem;
+            border-left: 4px solid var(--c-terra);
+            padding-left: 2rem;
         }
 
         .about-right li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--c-blue);
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .top-nav { display: none; /* Hide full nav on mobile for this mockup */ }
-            .value-item { grid-template-columns: 1fr; text-align: center; }
-            .about-block { grid-template-columns: 1fr; gap: 1rem; }
+        @media (max-width: 1024px) {
+            .top-nav { display: none; } /* Hide faux nav on smaller screens */
+            .value-item { 
+                grid-template-columns: 1fr; 
+                text-align: center; 
+                min-height: auto; /* Let it flow naturally on tablet/mobile */
+                padding: 6rem 1rem; 
+            }
+            .value-number { font-size: 8rem; }
+            .value-content h3 { font-size: 3rem; }
+             .about-block { grid-template-columns: 1fr; gap: 2rem; }
             .layer-statements { grid-template-columns: 1fr; }
         }
-
     </style>
 </head>
 <body class="modal-open">
@@ -388,7 +397,6 @@
     <main id="site-wrapper" class="blur-active">
 
         <section class="layer-logo reveal">
-            
             <nav class="top-nav">
                 <ul class="nav-list">
                     <li class="nav-item">Home</li>
@@ -399,7 +407,6 @@
                     <li class="nav-item">Speakers</li>
                 </ul>
             </nav>
-
             <img src="assets/images/EduTalkzLogo.png" alt="EduTalkz Logo">
         </section>
 
@@ -503,9 +510,9 @@
                 <div class="about-right">
                     <p>Teachers are often unable to attend in-person workshops due to cost and geographic constraints. Online learning removes these barriers.</p>
                     <ul>
-                        <li><strong>Anytime Access:</strong> Live or on-demand viewing creates a library for lifelong learning.</li>
-                        <li><strong>Mobile First:</strong> Optimised for phones, ensuring access in rural and low-resource settings.</li>
-                        <li><strong>Cost-Effective:</strong> EduTalkz remains free to teachers, ensuring no educator is excluded due to financial constraints.</li>
+                        <li>Anytime Access: Live or on-demand viewing creates a library for lifelong learning.</li>
+                        <li>Mobile First: Optimised for phones, ensuring access in rural and low-resource settings.</li>
+                        <li>Cost-Effective: EduTalkz remains free to teachers, ensuring no educator is excluded due to financial constraints.</li>
                     </ul>
                 </div>
             </div>
@@ -537,7 +544,7 @@
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // 3. Glowing Numbers Observer
+        // 3. Glowing Numbers Observer (Tweaked for larger items)
         const glowObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -546,7 +553,7 @@
                     entry.target.classList.remove('glow-active');
                 }
             });
-        }, { rootMargin: '-20% 0px -20% 0px', threshold: 0.5 }); 
+        }, { rootMargin: '-25% 0px -25% 0px', threshold: 0.3 }); 
 
         document.querySelectorAll('.value-item').forEach(el => glowObserver.observe(el));
     </script>
